@@ -1,9 +1,8 @@
 package com.tadaah.freelancer.entity;
 
 import java.time.LocalDate;
-
-import org.springframework.data.annotation.Id;
-
+import java.time.LocalDateTime;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +18,16 @@ public class Freelancer {
     private String gender;
     private String status;
     private LocalDate dateOfBirth;
+    @Column(name = "deleteTime")
+    private LocalDateTime deletionTime;
 
+    
+    public LocalDateTime getDeletionTime() {
+        return deletionTime;
+    }
+    public void setDeletionTime(LocalDateTime deletionTime) {
+        this.deletionTime = deletionTime;
+    }
     public long getFreelancerId() {
         return freelancerId;
     }

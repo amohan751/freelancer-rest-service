@@ -16,7 +16,6 @@ import com.tadaah.freelancer.service.NotificationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -33,7 +32,6 @@ public class FreelancerController {
     @PostMapping("/register")
     public ResponseEntity<Freelancer> registerFreelancer(@RequestBody Freelancer freelancer) {
         freelancerService.createFreelancer(freelancer);
-        //async
         notificationService.sendNotification("Freelancer with freelancerId :"+freelancer.getFreelancerId()+" registered");
         //return appropriate http response code
         return new ResponseEntity<>(HttpStatusCode.valueOf(200));
@@ -42,7 +40,6 @@ public class FreelancerController {
     @PutMapping("/update/{freelancerId}")
     public ResponseEntity<Freelancer> updateFreelancer(@PathVariable Long freelancerId, @RequestBody Freelancer freelancer){
         Freelancer updatedFreelancer = freelancerService.updatFreelancer(freelancerId, freelancer);
-        //async
         notificationService.sendNotification("Freelancer with freelancerId :"+freelancerId+" updated");
         return ResponseEntity.ok(updatedFreelancer);
     }
@@ -50,7 +47,6 @@ public class FreelancerController {
     @PutMapping("/verify/{freelancerId}/status/{verificationStatus}")
     public ResponseEntity<Freelancer> verifyFreelancer(@PathVariable Long freelancerId, @PathVariable String verificationStatus){
         Freelancer updatedFreelancer = freelancerService.verifyFreelancer(freelancerId, verificationStatus);
-        //async
         notificationService.sendNotification("Freelancer with freelancerId :"+freelancerId+" verified");
         return ResponseEntity.ok(updatedFreelancer);
     }
@@ -67,12 +63,17 @@ public class FreelancerController {
         return ResponseEntity.ok(freelancers);
     }
 
-    @DeleteMapping("/deleteFreelancer/{freelancerId}")
+    @PutMapping("/deleteFreelancer/{freelancerId}")
     public ResponseEntity<String> deleteFreelancer(@PathVariable Long freelancerId){
         String deleteMessage = freelancerService.deleteFreelancer(freelancerId);
-        //async
         notificationService.sendNotification("Freelancer with freelancerId :"+freelancerId+" deleted");
         return ResponseEntity.ok(deleteMessage);
+    }
+
+    @GetMapping("/deletedInLast7Days")
+    public ResponseEntity<List<Freelancer>> getPast7DaysDeleteFreelancers(){
+        List<Freelancer> freelancers = freelancerService.getFreelancersMarkedForDeletionLast7Days();
+        return ResponseEntity.ok(freelancers);
     }
     
 
