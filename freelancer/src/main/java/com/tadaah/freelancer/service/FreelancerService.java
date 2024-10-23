@@ -15,6 +15,7 @@ public class FreelancerService {
 
     //persist new freelancer registrations
     public Freelancer createFreelancer(Freelancer freelancer){
+        //create enum/constants
         freelancer.setStatus("NEW_FREELANCER");
         return freelancerRepository.save(freelancer);
     }
@@ -26,6 +27,17 @@ public class FreelancerService {
         freelancer.setLastName(freelancerUpdate.getLastName());
         freelancer.setGender(freelancerUpdate.getGender());
         freelancer.setDateOfBirth(freelancerUpdate.getDateOfBirth());
+        freelancer.setStatus("VERIFED");
+        return freelancerRepository.save(freelancer);
+    }
+
+    //updates the freelancer data after verification
+    public Freelancer verifyFreelancer(Long freelancerId, String status){
+        if (status.equalsIgnoreCase("VERIFIED")) {
+            //check status
+        }
+        Freelancer freelancer = freelancerRepository.findById(freelancerId).orElseThrow();
+        freelancer.setStatus("VERIFED");
         return freelancerRepository.save(freelancer);
     }
 
