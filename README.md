@@ -2,8 +2,8 @@
 ## Deliverables ##
   Your challenge is to create a Spring Boot REST API with the specified API calls below. You are free to use any frameworks/libraries you want and add additional features as long as the specified functionality is in place.
 ## Submission ##
-  - Please ensure that you share the exact steps to run the application or include docker-
-  - compose and Dockerfile to run it seamlessly.
+  - Please ensure that you share the exact steps to run the application or 
+  - include docker-compose and Dockerfile to run it seamlessly.
   - Build a Docker container for each service you implement.
   - The submission should be in the form of a GitHub repository link.
 ## Planning ##
@@ -15,6 +15,7 @@
       - last name
       - date of birth
       - gender
+      - status
     - Responses
       - 200 ok
       - 201 ok
@@ -83,3 +84,6 @@
         - not found message
       - 500
         - server error message
+## Setting up application ##
+  The application is built using spring-boot 3.3.4 and Java 17. The Docker file committed with this application has the necessary details to compile and run the application.
+  use "docker-compose build" and "docker-compose up" to build and run the application.
