@@ -1,0 +1,186 @@
+openapi: 3.0.0
+info:
+  title: Freelancer Registration API
+  description: "Spring Boot application that exposes a REST API. Freelancers should be able to register themselves (first name, last name, date of birth and gender)."
+  contact:
+    name: Abhijith Mohan
+    email: abhijith.or.mohan@gmail.com
+  version: "1.0"
+
+paths:
+  /api/freelancer/register:
+    description: registering a new freelancer
+    post:
+      description: operations to persist new freelancer into database
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/freelancer'
+      responses:
+        "201":
+          description: successfully added to database
+  /api/freelancer/update/{freelancerId}:
+    description: registering a new freelancer
+    put:
+      description: operations to update new freelancer
+      parameters:
+      - name: freelancerId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/freelancer'
+      responses:
+        "201":
+          description: successfully added to database
+  /api/freelancer/verify/{freelancerId}:
+    description: registering a new freelancer
+    put:
+      description: operations to verify new freelancer by Staff user
+      parameters:
+      - name: freelancerId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "201":
+          description: successfully added to database
+  /api/freelancer/deleteFreelancer/{freelancerId}:
+    description: registering a new freelancer
+    put:
+      description: operations to fetch new freelancer with search ID
+      parameters:
+      - name: freelancerId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "201":
+          description: successfully added to database
+  /api/freelancer/getFreelancers/{status}:
+    description: get freelancer by status to view a freelancer for Staff user.
+    get:
+      parameters:
+      - name: status
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: NEW_INSTALL
+      responses:
+        "200":
+          description: success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/freelancers'
+  /api/freelancer/getFreelancers/{freelancerId}:
+    description: get freelancer by Id to view a freelancer.
+    get:
+      parameters:
+      - name: freelancerId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/freelancer'
+  /api/freelancer/deletedInLast7Days:
+    description: get freelancers who is marked for deletion in last 7 days.
+    get:
+      responses:
+        "200":
+          description: success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/freelancersDelete'
+components:
+  schemas:
+    freelancer:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        freelancerId:
+          type: number
+        gender:
+          type: string
+          example: Male
+        status:
+          type: string
+          example: NEW_INSTALL
+        dateOfBirth:
+          type: number
+    freelancers:
+      type: array
+      items:
+        $ref: '#/components/schemas/freelancers_inner'
+    freelancersDelete:
+      type: array
+      items:
+        $ref: '#/components/schemas/freelancersDelete_inner'
+    freelancers_inner:
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        freelancerId:
+          type: number
+        gender:
+          type: string
+          example: Male
+        status:
+          type: string
+          example: NEW_INSTALL
+        dateOfBirth:
+          type: number
+    freelancersDelete_inner:
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        freelancerId:
+          type: number
+        gender:
+          type: string
+          example: Male
+        status:
+          type: string
+          example: DELETE
+        dateOfBirth:
+          type: number
+        deletionTime:
+          type: number

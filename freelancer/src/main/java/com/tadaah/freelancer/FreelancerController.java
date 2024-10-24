@@ -58,7 +58,7 @@ public class FreelancerController {
     }
 
     @GetMapping("/getFreelancers/{freelancerId}")
-    public ResponseEntity<List<Freelancer>> getFreelancerByStatus(@PathVariable Long freelancerId){
+    public ResponseEntity<List<Freelancer>> getFreelancerById(@PathVariable Long freelancerId){
         List<Freelancer> freelancers = freelancerService.getFreelancersByFreelancerId(freelancerId);
         return ResponseEntity.ok(freelancers);
     }
