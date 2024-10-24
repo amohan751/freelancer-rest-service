@@ -22,6 +22,17 @@ public class Freelancer {
     private LocalDateTime deletionTime;
 
     
+    public Freelancer(long freelancerId, String firstName, String lastName, String gender, String status,
+            LocalDate dateOfBirth, LocalDateTime deletionTime) {
+        this.freelancerId = freelancerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.status = status;
+        this.dateOfBirth = dateOfBirth;
+        this.deletionTime = deletionTime;
+    }
+
     public LocalDateTime getDeletionTime() {
         return deletionTime;
     }

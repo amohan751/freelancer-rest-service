@@ -22,7 +22,7 @@ public class FreelancerService {
     }
 
     //take in any updates to the freelancer data after registration
-    public Freelancer updatFreelancer(Long freelancerId, Freelancer freelancerUpdate){
+    public Freelancer updateFreelancer(Long freelancerId, Freelancer freelancerUpdate){
         Freelancer freelancer = freelancerRepository.findById(freelancerId).orElseThrow();
         freelancer.setFirstName(freelancerUpdate.getFirstName());
         freelancer.setLastName(freelancerUpdate.getLastName());
@@ -32,10 +32,7 @@ public class FreelancerService {
     }
 
     //updates the freelancer data after verification
-    public Freelancer verifyFreelancer(Long freelancerId, String status){
-        if (status.equalsIgnoreCase("VERIFIED")) {
-            //check status
-        }
+    public Freelancer verifyFreelancer(Long freelancerId){
         Freelancer freelancer = freelancerRepository.findById(freelancerId).orElseThrow();
         freelancer.setStatus("VERIFED");
         return freelancerRepository.save(freelancer);

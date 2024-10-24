@@ -39,14 +39,14 @@ public class FreelancerController {
     
     @PutMapping("/update/{freelancerId}")
     public ResponseEntity<Freelancer> updateFreelancer(@PathVariable Long freelancerId, @RequestBody Freelancer freelancer){
-        Freelancer updatedFreelancer = freelancerService.updatFreelancer(freelancerId, freelancer);
+        Freelancer updatedFreelancer = freelancerService.updateFreelancer(freelancerId, freelancer);
         notificationService.sendNotification("Freelancer with freelancerId :"+freelancerId+" updated");
         return ResponseEntity.ok(updatedFreelancer);
     }
 
-    @PutMapping("/verify/{freelancerId}/status/{verificationStatus}")
-    public ResponseEntity<Freelancer> verifyFreelancer(@PathVariable Long freelancerId, @PathVariable String verificationStatus){
-        Freelancer updatedFreelancer = freelancerService.verifyFreelancer(freelancerId, verificationStatus);
+    @PutMapping("/verify/{freelancerId}")
+    public ResponseEntity<Freelancer> verifyFreelancer(@PathVariable Long freelancerId){
+        Freelancer updatedFreelancer = freelancerService.verifyFreelancer(freelancerId);
         notificationService.sendNotification("Freelancer with freelancerId :"+freelancerId+" verified");
         return ResponseEntity.ok(updatedFreelancer);
     }
