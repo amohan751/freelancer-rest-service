@@ -87,3 +87,5 @@
 ## Setting up application ##
   The application is built using spring-boot 3.3.4 and Java 17. The Docker file committed with this application has the necessary details to compile and run the application.
   use "docker-compose build" and "docker-compose up" to build and run the application.
+## API Specification ##
+  API specification is added with the swagger document named "Freelancer-rest-service_APIspecification-1.0"
